@@ -2,7 +2,7 @@ import logging
 import os
 import time
 import uuid
-
+from app.util import validate_json
 import requests
 from gtts import gTTS
 from pydub import AudioSegment
@@ -36,6 +36,8 @@ async def to_speech(text, background_tasks):
 async def _edge_tts_to_speech(text, background_tasks):
     start_time = time.time()
 
+    text, is_valid = validate_json(text)
+
     communicate = edge_tts.Communicate(text, EDGETTS_VOICE)
     filepath = f"/tmp/{uuid.uuid4()}.mp3"
     await communicate.save(filepath)
@@ -49,6 +51,8 @@ async def _edge_tts_to_speech(text, background_tasks):
 
 def _gtts_to_speech(text, background_tasks):
     start_time = time.time()
+    
+    text, is_valid = validate_json(text)
 
     tts = gTTS(text, lang=LANGUAGE)
     filepath = f"/tmp/{uuid.uuid4()}.mp3"
@@ -63,6 +67,8 @@ def _gtts_to_speech(text, background_tasks):
 
 def _elevenlabs_to_speech(text, background_tasks):
     start_time = time.time()
+
+    text, is_valid = validate_json(text)
 
     audio = generate(
         api_key=ELEVENLABS_API_KEY,
@@ -83,6 +89,8 @@ def _elevenlabs_to_speech(text, background_tasks):
 
 def _streamelements_to_speech(text, background_tasks):
     start_time = time.time()
+
+    text, is_valid = validate_json(text)
 
     response = requests.get(f"https://api.streamelements.com/kappa/v2/speech?voice=Salli&text={text}")
 

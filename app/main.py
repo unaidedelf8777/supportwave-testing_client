@@ -2,7 +2,7 @@ import base64
 import json
 import time
 import logging
-
+from app.util import validate_json
 from fastapi import FastAPI, UploadFile, BackgroundTasks, Header
 from fastapi.responses import FileResponse
 from fastapi.responses import RedirectResponse
