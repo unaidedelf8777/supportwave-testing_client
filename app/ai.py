@@ -6,7 +6,7 @@ import time
 
 import openai
 
-AI_COMPLETION_MODEL = os.getenv("AI_COMPLETION_MODEL", "gpt-4")
+AI_COMPLETION_MODEL = os.getenv("AI_COMPLETION_MODEL", "gpt-3.5-turbo")
 LANGUAGE = os.getenv("LANGUAGE", "en")
 INITIAL_PROMPT = """You are a AI customer support agent. Your Name can be whatever you choose.
 As an AI customer support agent, you MUST speak in Json format using the keys shown in a example response below:
@@ -55,6 +55,8 @@ Now that you know how to respond, lets go over some basic rules:
 11. Do not acknwledge that you are a AI. as far as the customer knows, you are a real person. 
 
 Head these rules and regulations, and you will be a great AI customer support agent.
+
+and one more Note, Dont be afraid to have a personality! personalized and welcoming customer service is the best customer service!
 
 """
 
